@@ -11,14 +11,15 @@ defineProps({
 export default {
   data() {
     return {
-      count: 0
+      count: 0,
+      isDisabled: this.count > 0
     }
   },
 
   methods: {
     increment() {
-      console.log('this.count', this.count)
       this.count++
+      console.log('this.count', {count:this.count, dis:this.isDisabled})
     }
   },
 
@@ -30,8 +31,8 @@ export default {
 
 <template>
   <div class="greetings">
-    <h1 class="green">{{ msg }}</h1>
-    <button @click="increment">count: {{count}}</button>
+    <h1 class="green" v-if="isDisabled">{{ msg }}</h1>
+    <button @click="increment" :disabled="isDisabled">count: {{count}}</button>
     <h3>
       You’ve successfully created a project with
       <a href="https://vitejs.dev/" target="_blank" rel="noopener">Vite</a> +
